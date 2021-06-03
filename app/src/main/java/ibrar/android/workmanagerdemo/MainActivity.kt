@@ -1,9 +1,9 @@
-package aish.android.workmanagerdemo
+package ibrar.android.workmanagerdemo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import aish.android.workmanagerdemo.SharedPrefsManager.get
-import aish.android.workmanagerdemo.SharedPrefsManager.set
+import ibrar.android.workmanagerdemo.SharedPrefsManager.get
+import ibrar.android.workmanagerdemo.SharedPrefsManager.set
 import android.util.Log
 
 class MainActivity : AppCompatActivity() {

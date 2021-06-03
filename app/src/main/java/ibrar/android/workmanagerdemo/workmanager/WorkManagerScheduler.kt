@@ -1,10 +1,11 @@
-package aish.android.workmanagerdemo
+package ibrar.android.workmanagerdemo
 
 import android.content.Context
 import android.util.Log
 import androidx.work.*
 import java.util.*
 import java.util.concurrent.TimeUnit
+
 
 object WorkManagerScheduler {
 
@@ -13,9 +14,9 @@ object WorkManagerScheduler {
         val currentDate = Calendar.getInstance()
         val dueDate = Calendar.getInstance()
 
-        // Set Execution around 04:00:00 AM
-        dueDate.set(Calendar.HOUR_OF_DAY, 17)
-        dueDate.set(Calendar.MINUTE, 45)
+        // Set Execution around 04:00:00 PM
+        dueDate.set(Calendar.HOUR_OF_DAY, 18)
+        dueDate.set(Calendar.MINUTE, 59)
         dueDate.set(Calendar.SECOND, 0)
         if (dueDate.before(currentDate)) {
             dueDate.add(Calendar.HOUR_OF_DAY, 24)
@@ -29,19 +30,31 @@ object WorkManagerScheduler {
         //define constraints
         val myConstraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
+            .setRequiresCharging(false)
+            .setRequiresStorageNotLow(false)
             .build()
 
+//
+//        val impWork = OneTimeWorkRequest.Builder(MyWorker::class.java)
+//            .setConstraints(myConstraints)
+//            .addTag("myWorkManager")
+//            .build()
+//
+//
+//        WorkManager.getInstance(context)
+//            .enqueueUniqueWork("myWorkManager", ExistingWorkPolicy.REPLACE, impWork)
 
-        val refreshCpnWork = PeriodicWorkRequest.Builder(MyWorker::class.java,
-            15, TimeUnit.MINUTES)
+               val refreshCpnWork = PeriodicWorkRequest.Builder(MyWorker::class.java,
+            0, TimeUnit.MINUTES)
             .setInitialDelay(minutes, TimeUnit.MINUTES)
             .setConstraints(myConstraints)
             .addTag("myWorkManager")
             .build()
 
-
-        WorkManager.getInstance(context).enqueueUniquePeriodicWork("myWorkManager",
-            ExistingPeriodicWorkPolicy.REPLACE, refreshCpnWork)
+        WorkManager.getInstance(context).enqueueUniquePeriodicWork(
+            "myWorkManager",
+            ExistingPeriodicWorkPolicy.REPLACE, refreshCpnWork
+        )
 
     }
 }

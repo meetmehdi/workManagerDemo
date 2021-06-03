@@ -7,7 +7,7 @@ android {
 
 
     defaultConfig {
-        applicationId "aish.android.workmanagerdemo"
+        applicationId "ibrar.android.workmanagerdemo"
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
